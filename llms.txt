@@ -1,0 +1,71 @@
+# Frostbyte API
+
+> 40+ free APIs for developers and AI agents. One key, zero friction.
+
+Frostbyte is a unified API platform providing 40+ production-ready services through a single API key. No signup required. Free tier with 200 credits.
+
+## Base URL
+https://api-catalog-three.vercel.app
+
+## Authentication
+All endpoints use Bearer token authentication:
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+Get a free key: `POST https://api-catalog-three.vercel.app/api/keys/create`
+
+## Popular APIs
+
+### IP Geolocation
+- `GET /v1/agent-geo/geo/:ip` — City, region, country, coordinates, ISP, timezone
+
+### Crypto Prices
+- `GET /v1/defi-trading/prices` — Real-time prices for 500+ tokens
+
+### Screenshots
+- `GET /v1/agent-screenshot/screenshot?url=` — Capture any website as PNG
+
+### Web Scraping
+- `GET /v1/agent-scraper/scrape?url=` — Extract text, links, metadata from any URL
+
+### DNS Lookup
+- `GET /v1/agent-dns/api/resolve/:domain` — A, AAAA, MX, TXT, NS, CNAME records
+
+### Code Execution
+- `POST /v1/agent-coderunner/api/execute` — Run code in 10+ languages
+
+### PDF Generation
+- `POST /v1/agent-pdfgen/api/generate` — Generate PDFs from HTML/Markdown
+
+### URL Shortener
+- `POST /v1/agent-shorturl/api/shorten` — Shorten any URL
+
+### Web Search
+- `GET /v1/agent-search/api/search?q=` — Search the web programmatically
+
+### Pastebin
+- `POST /v1/agent-paste/api/pastes` — Create and share text snippets
+
+### Email
+- `POST /v1/agent-email/api/inboxes` — Disposable email inboxes for agents
+
+### Crypto Wallets
+- `POST /v1/frostbyte-wallet/api/v1/wallets` — Multi-chain wallet operations
+
+## SDKs
+- JavaScript/TypeScript: https://github.com/OzorOwn/frostbyte-api
+- Python: https://github.com/OzorOwn/frostbyte-api
+- MCP Server: https://github.com/OzorOwn/frostbyte-mcp
+- GitHub Action: https://github.com/OzorOwn/frostbyte-screenshot-action
+
+## Pricing
+- Free: 200 credits (1 credit = 1 request), valid 30 days
+- Paid: $1 USDC = 500 credits, valid 90 days
+
+## Links
+- Documentation: https://ozorown.github.io
+- API Catalog: https://api-catalog-three.vercel.app
+- Swagger Docs: https://api-catalog-three.vercel.app/docs
+- OpenAPI Spec: https://api-catalog-three.vercel.app/openapi.json
+- Blog: https://dev.to/ozorown
