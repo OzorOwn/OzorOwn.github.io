@@ -227,11 +227,12 @@ footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin
   <h2>Get Your Free API Key</h2>
   <p class="subtitle">No signup, no email, no credit card. One command and you're live.</p>
   <div class="cta-code">
-    <span style="color:var(--text2)"># Get your API key (instant, no signup)</span><br>
-    curl -X POST https://agent-gateway-kappa.vercel.app/api/keys/create<br><br>
-    <span style="color:var(--text2)"># Look up any IP address</span><br>
-    curl "https://agent-gateway-kappa.vercel.app/v1/agent-geo/geo/8.8.8.8" \<br>
-    &nbsp;&nbsp;-H "Authorization: Bearer YOUR_API_KEY"
+    <span style="color:var(--text2)"># Public endpoint — no API key needed</span><br>
+    curl https://agent-gateway-kappa.vercel.app/ip<br>
+    curl https://agent-gateway-kappa.vercel.app/ip/json<br>
+    curl https://agent-gateway-kappa.vercel.app/ip/geo/8.8.8.8<br><br>
+    <span style="color:var(--text2)"># Full API with batch lookups (free API key)</span><br>
+    curl -X POST https://agent-gateway-kappa.vercel.app/api/keys/create
   </div>
   <div class="cta-group">
     <a href="https://agent-gateway-kappa.vercel.app/docs" class="btn btn-primary">API Documentation</a>
