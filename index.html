@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frostbyte API — 40+ Free APIs for Developers | One Key, One Platform</title>
+<meta name="description" content="Free API platform with 40+ services: IP geolocation, crypto prices, screenshots, web scraping, DNS lookup, code execution, and more. No signup required. Get your API key in seconds.">
+<meta name="keywords" content="free API, API platform, IP geolocation API, crypto price API, screenshot API, web scraping API, DNS lookup API, developer tools, REST API, free tier">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Frostbyte">
+<link rel="canonical" href="https://ozorown.github.io">
+<meta property="og:title" content="Frostbyte API — 40+ Free APIs for Developers">
+<meta property="og:description" content="One API key for IP geolocation, crypto prices, screenshots, web scraping, DNS, code execution, and 35+ more services. Free 200 credits, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ozorown.github.io">
+<meta property="og:site_name" content="Frostbyte API">
+<meta property="og:image" content="https://placehold.co/1200x630/0a0a0a/60a5fa.png?text=Frostbyte+API%0A40%2B+Free+APIs+for+Developers">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Frostbyte API — 40+ Free APIs, One Key">
+<meta name="twitter:description" content="IP geolocation, crypto prices, screenshots, web scraping, DNS, code execution. Free tier. No signup.">
+<meta name="twitter:image" content="https://placehold.co/1200x630/0a0a0a/60a5fa.png?text=Frostbyte+API%0A40%2B+Free+APIs+for+Developers">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "name": "Frostbyte API",
+  "description": "Unified API platform providing 40+ production-ready services for developers and AI agents. IP geolocation, crypto prices, screenshots, web scraping, DNS, code execution, and more.",
+  "url": "https://ozorown.github.io",
+  "documentation": "https://ozorown.github.io/#docs",
+  "termsOfService": "https://ozorown.github.io/#pricing",
+  "provider": {
+    "@type": "Organization",
+    "name": "Frostbyte",
+    "url": "https://ozorown.github.io"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free tier with 200 API credits"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0f1a;--surface:#111827;--surface2:#1a2235;--border:#1e293b;--text:#e2e8f0;--text2:#94a3b8;--accent:#60a5fa;--accent2:#818cf8;--green:#34d399;--yellow:#fbbf24;--red:#f87171;--mono:'SF Mono',ui-monospace,'Cascadia Code',Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:0.9em;background:var(--surface2);padding:2px 6px;border-radius:4px}
+
+/* Layout */
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+section+section{border-top:1px solid var(--border)}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:100;background:rgba(11,15,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px}
+nav .inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+nav .logo{font-weight:700;font-size:1.1rem;color:#fff;display:flex;align-items:center;gap:8px}
+nav .logo span{color:var(--accent)}
+nav .links{display:flex;gap:24px;align-items:center}
+nav .links a{color:var(--text2);font-size:14px;font-weight:500;transition:color .15s}
+nav .links a:hover{color:#fff;text-decoration:none}
+nav .cta-btn{background:var(--accent);color:#0b0f1a;padding:7px 16px;border-radius:6px;font-weight:600;font-size:13px}
+nav .cta-btn:hover{background:#93c5fd;text-decoration:none}
+@media(max-width:640px){nav .links a:not(.cta-btn){display:none}}
+
+/* Hero */
+.hero{padding:100px 0 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(96,165,250,.06) 0%,rgba(129,140,248,.04) 30%,transparent 60%);pointer-events:none}
+.hero h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:#fff;letter-spacing:-1.5px;line-height:1.15;margin-bottom:20px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--text2);max-width:600px;margin:0 auto 32px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:600;font-size:15px;transition:all .15s;cursor:pointer;border:none}
+.btn-primary{background:var(--accent);color:#0b0f1a}.btn-primary:hover{background:#93c5fd;text-decoration:none;color:#0b0f1a}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:48px;max-width:700px;margin-left:auto;margin-right:auto}
+.stat{background:var(--surface);padding:24px 16px;text-align:center}
+.stat .num{font-size:1.6rem;font-weight:700;color:#fff}
+.stat .label{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+@media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* Quick Start */
+.quickstart{background:var(--surface)}
+.quickstart h2{font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:8px}
+.quickstart .subtitle{color:var(--text2);margin-bottom:32px}
+.steps{display:grid;gap:24px}
+.step{display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start}
+.step-num{width:36px;height:36px;border-radius:50%;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:8px}
+.step p{color:var(--text2);font-size:14px;margin-bottom:8px}
+
+/* Code blocks */
+.code-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;position:relative}
+.code-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border)}
+.code-lang{font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text2);letter-spacing:1px}
+.copy-btn{background:none;border:1px solid var(--border);color:var(--text2);padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer;font-family:var(--sans)}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.code-block pre{padding:16px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--text)}
+.code-block pre .comment{color:#6b7280}
+.code-block pre .string{color:var(--green)}
+.code-block pre .keyword{color:var(--accent2)}
+.code-block pre .response{color:var(--text2);font-style:italic}
+
+/* API Reference */
+.api-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:32px}
+.api-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;transition:border-color .15s}
+.api-card:hover{border-color:rgba(96,165,250,.4)}
+.api-card .icon{font-size:1.4rem;margin-bottom:12px}
+.api-card h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:6px}
+.api-card p{font-size:13px;color:var(--text2);margin-bottom:12px}
+.api-card .endpoint{font-family:var(--mono);font-size:12px;color:var(--green);background:rgba(52,211,153,.08);padding:4px 8px;border-radius:4px;display:inline-block}
+.badge-free{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--green);background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);padding:2px 8px;border-radius:4px;margin-left:8px}
+
+/* SDK section */
+.sdk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:24px}
+.sdk-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;display:flex;flex-direction:column}
+.sdk-card h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sdk-card p{font-size:13px;color:var(--text2);flex:1;margin-bottom:16px}
+.sdk-card .sdk-link{font-size:13px;font-weight:600;color:var(--accent)}
+
+/* Pricing */
+.pricing-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:32px}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:32px;text-align:center}
+.price-card.featured{border-color:var(--accent);position:relative}
+.price-card.featured::before{content:'POPULAR';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0b0f1a;font-size:10px;font-weight:700;padding:2px 12px;border-radius:4px;letter-spacing:1px}
+.price-card h3{font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:8px}
+.price-card .price{font-size:2.4rem;font-weight:800;color:#fff;margin-bottom:4px}
+.price-card .price span{font-size:1rem;font-weight:400;color:var(--text2)}
+.price-card .desc{font-size:13px;color:var(--text2);margin-bottom:20px}
+.price-card ul{list-style:none;text-align:left;margin-bottom:24px}
+.price-card li{font-size:14px;color:var(--text2);padding:6px 0;display:flex;align-items:start;gap:8px}
+.price-card li::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-top:8px;flex-shrink:0}
+
+/* Interactive demo */
+.demo-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin-top:32px}
+.demo-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.demo-tab{background:transparent;border:1px solid var(--border);color:var(--text2);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-family:var(--sans);font-weight:500;transition:all .15s}
+.demo-tab.active{background:rgba(96,165,250,.1);border-color:var(--accent);color:var(--accent)}
+.demo-output{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--mono);font-size:13px;min-height:120px;overflow-x:auto;white-space:pre;line-height:1.5}
+.demo-run{background:var(--accent);color:#0b0f1a;border:none;padding:8px 20px;border-radius:6px;font-weight:600;font-size:13px;cursor:pointer;font-family:var(--sans);margin-bottom:12px;transition:background .15s}
+.demo-run:hover{background:#93c5fd}
+.demo-curl{font-family:var(--mono);font-size:12px;color:var(--text2);margin-bottom:12px;background:var(--bg);padding:10px 14px;border-radius:6px;overflow-x:auto;white-space:nowrap}
+.demo-loading{color:var(--text2);font-style:italic}
+
+/* Footer */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:48px 0 32px}
+.footer-grid{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:32px;margin-bottom:32px}
+.footer-grid h4{font-size:13px;font-weight:600;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.footer-grid a{display:block;font-size:13px;color:var(--text2);padding:3px 0;transition:color .15s}
+.footer-grid a:hover{color:var(--accent);text-decoration:none}
+.footer-brand p{font-size:13px;color:var(--text2);margin-top:8px}
+.footer-bottom{font-size:12px;color:#4b5563;text-align:center;padding-top:24px;border-top:1px solid var(--border)}
+@media(max-width:640px){.footer-grid{grid-template-columns:1fr 1fr}}
+
+/* Try It section */
+.try-section{position:relative}
+.try-section h2{font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:8px}
+.try-section .subtitle{color:var(--text2);margin-bottom:16px}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="inner">
+<a href="/" class="logo">&#x2744; <span>Frostbyte</span> API</a>
+<div class="links">
+<a href="#quickstart">Quick Start</a>
+<a href="#apis">APIs</a>
+<a href="#sdks">SDKs</a>
+<a href="#pricing">Pricing</a>
+<a href="https://api-catalog-three.vercel.app/docs" target="_blank">Docs</a>
+<a href="https://api-catalog-three.vercel.app/api/keys/create" class="cta-btn" target="_blank">Get Free Key</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<h1>40+ Free APIs.<br><em>One key. Zero friction.</em></h1>
+<p>IP geolocation, crypto prices, screenshots, web scraping, DNS, code execution, and more. Get your API key in one request. No signup, no credit card.</p>
+<div class="hero-actions">
+<a href="#quickstart" class="btn btn-primary">Get Started Free</a>
+<a href="https://github.com/OzorOwn/frostbyte-api" class="btn btn-outline" target="_blank">View SDK on GitHub</a>
+</div>
+<div class="stats">
+<div class="stat"><div class="num">40+</div><div class="label">APIs</div></div>
+<div class="stat"><div class="num">200</div><div class="label">Free Credits</div></div>
+<div class="stat"><div class="num">&lt;200ms</div><div class="label">Avg Latency</div></div>
+<div class="stat"><div class="num">REST</div><div class="label">JSON API</div></div>
+</div>
+</div>
+</section>
+
+<section class="quickstart" id="quickstart">
+<div class="container">
+<h2>Quick Start</h2>
+<p class="subtitle">From zero to your first API call in 30 seconds.</p>
+<div class="steps">
+
+<div class="step">
+<div class="step-num">1</div>
+<div>
+<h3>Get your free API key</h3>
+<p>No signup form, no email verification. One POST request.</p>
+<div class="code-block">
+<div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<pre>curl -X POST https://api-catalog-three.vercel.app/api/keys/create</pre>
+</div>
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">2</div>
+<div>
+<h3>Make your first API call</h3>
+<p>Look up any IP address, get geolocation data back in JSON.</p>
+<div class="code-block">
+<div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<pre>curl -H <span class="string">"Authorization: Bearer YOUR_KEY"</span> \
+  https://api-catalog-three.vercel.app/v1/agent-geo/geo/8.8.8.8</pre>
+</div>
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">3</div>
+<div>
+<h3>Response</h3>
+<div class="code-block">
+<div class="code-header"><span class="code-lang">json</span></div>
+<pre>{
+  <span class="string">"ip"</span>: <span class="string">"8.8.8.8"</span>,
+  <span class="string">"city"</span>: <span class="string">"Mountain View"</span>,
+  <span class="string">"region"</span>: <span class="string">"California"</span>,
+  <span class="string">"country"</span>: <span class="string">"US"</span>,
+  <span class="string">"loc"</span>: <span class="string">"37.3861,-122.0839"</span>,
+  <span class="string">"org"</span>: <span class="string">"AS15169 Google LLC"</span>,
+  <span class="string">"timezone"</span>: <span class="string">"America/Los_Angeles"</span>
+}</pre>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="try-section" id="try">
+<div class="container">
+<h2>Try It Live</h2>
+<p class="subtitle">Click "Run" to make a real API call from your browser.</p>
+<div class="demo-box">
+<div class="demo-tabs">
+<button class="demo-tab active" onclick="selectDemo(0)">IP Geolocation</button>
+<button class="demo-tab" onclick="selectDemo(1)">Crypto Prices</button>
+<button class="demo-tab" onclick="selectDemo(2)">DNS Lookup</button>
+</div>
+<div class="demo-curl" id="demo-curl">curl https://api-catalog-three.vercel.app/v1/agent-geo/geo/8.8.8.8</div>
+<button class="demo-run" onclick="runDemo()">Run Request</button>
+<div class="demo-output" id="demo-output">Click "Run" to see the response...</div>
+</div>
+</div>
+</section>
+
+<section id="apis">
+<div class="container">
+<h2 style="font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:8px">API Reference</h2>
+<p style="color:var(--text2);margin-bottom:8px">Every API uses the same auth pattern: <code>Authorization: Bearer YOUR_KEY</code></p>
+<p style="color:var(--text2)">Base URL: <code>https://api-catalog-three.vercel.app</code></p>
+
+<div class="api-grid">
+
+<div class="api-card">
+<div class="icon">&#x1F30D;</div>
+<h3>IP Geolocation <span class="badge-free">Free</span></h3>
+<p>Look up any IP address. Get city, region, country, coordinates, ISP, timezone.</p>
+<span class="endpoint">GET /v1/agent-geo/geo/:ip</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4B0;</div>
+<h3>Crypto Prices <span class="badge-free">Free</span></h3>
+<p>Real-time prices for 500+ tokens. USD, EUR, BTC pairs. Powered by CoinGecko.</p>
+<span class="endpoint">GET /v1/defi-trading/prices</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4F7;</div>
+<h3>Screenshots <span class="badge-free">Free</span></h3>
+<p>Capture any website as PNG. Custom viewport, full-page, dark mode support.</p>
+<span class="endpoint">GET /v1/agent-screenshot/screenshot?url=</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F578;</div>
+<h3>Web Scraper <span class="badge-free">Free</span></h3>
+<p>Extract text, links, metadata from any URL. HTML, Markdown, or JSON output.</p>
+<span class="endpoint">GET /v1/agent-scraper/scrape?url=</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F310;</div>
+<h3>DNS Lookup <span class="badge-free">Free</span></h3>
+<p>Resolve any domain. A, AAAA, MX, TXT, NS, CNAME records.</p>
+<span class="endpoint">GET /v1/agent-dns/api/resolve/:domain</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4BB;</div>
+<h3>Code Execution <span class="badge-free">Free</span></h3>
+<p>Run code in 10+ languages. JavaScript, Python, Go, Rust, Ruby, and more.</p>
+<span class="endpoint">POST /v1/agent-coderunner/api/execute</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4C4;</div>
+<h3>PDF Generator</h3>
+<p>Generate PDFs from HTML or Markdown. Custom headers, footers, page sizes.</p>
+<span class="endpoint">POST /v1/agent-pdfgen/api/generate</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F517;</div>
+<h3>URL Shortener</h3>
+<p>Shorten any URL. Custom slugs. Click tracking. Permanent redirects.</p>
+<span class="endpoint">POST /v1/agent-shorturl/api/shorten</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F50D;</div>
+<h3>Web Search</h3>
+<p>Search the web programmatically. Returns titles, URLs, snippets.</p>
+<span class="endpoint">GET /v1/agent-search/api/search?q=</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4DD;</div>
+<h3>Pastebin</h3>
+<p>Create and share text snippets. Syntax highlighting. Expiry support.</p>
+<span class="endpoint">POST /v1/agent-paste/api/pastes</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4E7;</div>
+<h3>Email</h3>
+<p>Disposable email inboxes for agents. Create, receive, send. Webhook notifications.</p>
+<span class="endpoint">POST /v1/agent-email/api/inboxes</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4B1;</div>
+<h3>Crypto Wallets</h3>
+<p>Multi-chain wallet operations. 9 chains. Balance checks, token swaps.</p>
+<span class="endpoint">POST /v1/frostbyte-wallet/api/v1/wallets</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F3B2;</div>
+<h3>Provably Fair Games</h3>
+<p>Coin flip, dice roll, roulette. Cryptographic fairness proofs.</p>
+<span class="endpoint">POST /v1/fair-games/api/flip</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F504;</div>
+<h3>Data Transform</h3>
+<p>Convert between JSON, CSV, YAML, XML. Validate, format, minify.</p>
+<span class="endpoint">POST /v1/agent-transform/api/convert</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F5BC;</div>
+<h3>Image Processing</h3>
+<p>Resize, crop, rotate, watermark images. Format conversion.</p>
+<span class="endpoint">POST /v1/agent-imageproc/api/process</span>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x2699;</div>
+<h3>+25 More Services</h3>
+<p>Task queues, webhooks, scheduling, file storage, monitoring, secrets, and more.</p>
+<span class="endpoint"><a href="https://api-catalog-three.vercel.app" target="_blank" style="color:var(--accent)">View full catalog &rarr;</a></span>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="sdks" style="background:var(--surface)">
+<div class="container">
+<h2 style="font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:8px">SDKs &amp; Integrations</h2>
+<p style="color:var(--text2);margin-bottom:8px">Use Frostbyte in your preferred language and toolchain.</p>
+
+<div class="sdk-grid">
+
+<div class="sdk-card">
+<h3>JavaScript / TypeScript</h3>
+<p>Zero-dependency SDK for Node.js, Bun, Deno, and browsers. ESM + CJS.</p>
+<div class="code-block" style="margin-bottom:12px">
+<pre style="padding:10px;font-size:12px"><span class="keyword">import</span> Frostbyte <span class="keyword">from</span> <span class="string">'frostbyte-api'</span>
+<span class="keyword">const</span> fb = <span class="keyword">new</span> Frostbyte(<span class="string">'YOUR_KEY'</span>)
+<span class="keyword">const</span> geo = <span class="keyword">await</span> fb.geo.lookup(<span class="string">'8.8.8.8'</span>)</pre>
+</div>
+<a href="https://github.com/OzorOwn/frostbyte-api" class="sdk-link" target="_blank">View on GitHub &rarr;</a>
+</div>
+
+<div class="sdk-card">
+<h3>Python</h3>
+<p>Stdlib-only Python SDK. No external dependencies. Python 3.7+.</p>
+<div class="code-block" style="margin-bottom:12px">
+<pre style="padding:10px;font-size:12px"><span class="keyword">from</span> frostbyte <span class="keyword">import</span> Frostbyte
+fb = Frostbyte(<span class="string">"YOUR_KEY"</span>)
+geo = fb.geo.lookup(<span class="string">"8.8.8.8"</span>)</pre>
+</div>
+<a href="https://github.com/OzorOwn/frostbyte-api" class="sdk-link" target="_blank">View on GitHub &rarr;</a>
+</div>
+
+<div class="sdk-card">
+<h3>MCP Server</h3>
+<p>13 tools for Claude Desktop, Cursor, and Windsurf. Give your AI agent superpowers.</p>
+<div class="code-block" style="margin-bottom:12px">
+<pre style="padding:10px;font-size:12px">{
+  <span class="string">"mcpServers"</span>: {
+    <span class="string">"frostbyte"</span>: {
+      <span class="string">"command"</span>: <span class="string">"node"</span>,
+      <span class="string">"args"</span>: [<span class="string">"server.js"</span>]
+    }
+  }
+}</pre>
+</div>
+<a href="https://github.com/OzorOwn/frostbyte-mcp" class="sdk-link" target="_blank">View on GitHub &rarr;</a>
+</div>
+
+<div class="sdk-card">
+<h3>GitHub Action</h3>
+<p>Automated website screenshots in CI/CD. 5 viewports, dark mode, artifacts.</p>
+<div class="code-block" style="margin-bottom:12px">
+<pre style="padding:10px;font-size:12px">- uses: OzorOwn/frostbyte-screenshot-action@v1
+  <span class="keyword">with</span>:
+    url: <span class="string">"https://example.com"</span>
+    api-key: ${{ secrets.FROSTBYTE_KEY }}</pre>
+</div>
+<a href="https://github.com/OzorOwn/frostbyte-screenshot-action" class="sdk-link" target="_blank">View on GitHub &rarr;</a>
+</div>
+
+<div class="sdk-card">
+<h3>curl / HTTP</h3>
+<p>Works with any language or tool that speaks HTTP. REST + JSON everywhere.</p>
+<div class="code-block" style="margin-bottom:12px">
+<pre style="padding:10px;font-size:12px">curl -H <span class="string">"Authorization: Bearer KEY"</span> \
+  https://api-catalog-three.vercel.app\
+  /v1/agent-geo/geo/8.8.8.8</pre>
+</div>
+<a href="https://api-catalog-three.vercel.app/docs" class="sdk-link" target="_blank">Swagger Docs &rarr;</a>
+</div>
+
+<div class="sdk-card">
+<h3>OpenAPI Spec</h3>
+<p>Full OpenAPI 3.1 specification. Import into Postman, Insomnia, or any API client.</p>
+<div class="code-block" style="margin-bottom:12px">
+<pre style="padding:10px;font-size:12px"><span class="comment"># Download the spec</span>
+curl -o openapi.json \
+  https://api-catalog-three.vercel.app\
+  /openapi.json</pre>
+</div>
+<a href="https://api-catalog-three.vercel.app/openapi.json" class="sdk-link" target="_blank">Download Spec &rarr;</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="pricing">
+<div class="container">
+<h2 style="font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:8px;text-align:center">Pricing</h2>
+<p style="color:var(--text2);text-align:center;margin-bottom:8px">Start free. Pay only when you need more.</p>
+
+<div class="pricing-cards">
+
+<div class="price-card featured">
+<h3>Free Tier</h3>
+<div class="price">$0</div>
+<div class="desc">200 credits included</div>
+<ul>
+<li>200 API credits (1 credit per request)</li>
+<li>All 40+ APIs included</li>
+<li>No signup or credit card</li>
+<li>Rate limit: 120 req/min</li>
+<li>Credits valid for 30 days</li>
+</ul>
+<a href="https://api-catalog-three.vercel.app/api/keys/create" class="btn btn-primary" style="width:100%;justify-content:center" target="_blank">Get Free Key</a>
+</div>
+
+<div class="price-card">
+<h3>Pay As You Go</h3>
+<div class="price">$1 <span>/ 500 credits</span></div>
+<div class="desc">USDC on Base network</div>
+<ul>
+<li>Top up any amount ($1 minimum)</li>
+<li>1 USDC = 500 credits</li>
+<li>Same rate limit: 120 req/min</li>
+<li>Paid credits valid for 90 days</li>
+<li>Monero (XMR) also accepted</li>
+</ul>
+<a href="https://api-catalog-three.vercel.app/topup" class="btn btn-outline" style="width:100%;justify-content:center" target="_blank">Top Up Credits</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="use-cases" style="background:var(--surface)">
+<div class="container">
+<h2 style="font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:24px">Use Cases</h2>
+<div class="api-grid">
+
+<div class="api-card">
+<div class="icon">&#x1F916;</div>
+<h3>AI Agent Toolkits</h3>
+<p>Give LLM agents access to web scraping, screenshots, code execution, email, and DNS lookups. Perfect for CrewAI, LangChain, AutoGPT, and MCP.</p>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4CA;</div>
+<h3>Crypto Dashboards</h3>
+<p>Build portfolio trackers, price alerts, and DeFi analytics with real-time price feeds for 500+ tokens across major exchanges.</p>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F6E1;</div>
+<h3>Security &amp; Monitoring</h3>
+<p>IP reputation checks, domain WHOIS, DNS monitoring, visual regression testing with screenshots, uptime alerts.</p>
+</div>
+
+<div class="api-card">
+<div class="icon">&#x1F4E6;</div>
+<h3>SaaS &amp; Internal Tools</h3>
+<p>PDF generation, URL shortening, email verification, data format conversion. Replace 10 third-party APIs with one.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:4px">&#x2744; Frostbyte API</div>
+<p>40+ free APIs for developers and AI agents. One key, zero friction.</p>
+</div>
+<div>
+<h4>Product</h4>
+<a href="https://api-catalog-three.vercel.app" target="_blank">API Catalog</a>
+<a href="https://api-catalog-three.vercel.app/docs" target="_blank">Swagger Docs</a>
+<a href="https://api-catalog-three.vercel.app/pricing" target="_blank">Pricing</a>
+<a href="https://api-catalog-three.vercel.app/dashboard" target="_blank">Dashboard</a>
+</div>
+<div>
+<h4>Developers</h4>
+<a href="https://github.com/OzorOwn/frostbyte-api" target="_blank">JavaScript SDK</a>
+<a href="https://github.com/OzorOwn/frostbyte-mcp" target="_blank">MCP Server</a>
+<a href="https://github.com/OzorOwn/frostbyte-screenshot-action" target="_blank">GitHub Action</a>
+<a href="https://api-catalog-three.vercel.app/openapi.json" target="_blank">OpenAPI Spec</a>
+</div>
+<div>
+<h4>Resources</h4>
+<a href="https://dev.to/ozorown" target="_blank">Blog (Dev.to)</a>
+<a href="https://api-catalog-three.vercel.app/tools" target="_blank">Free Tools</a>
+<a href="https://api-catalog-three.vercel.app/llms.txt" target="_blank">llms.txt</a>
+<a href="#quickstart">Quick Start</a>
+</div>
+</div>
+<div class="footer-bottom">&copy; 2026 Frostbyte. All rights reserved.</div>
+</div>
+</footer>
+
+<script>
+const demos = [
+  { label:'IP Geolocation', curl:'curl https://api-catalog-three.vercel.app/v1/agent-geo/geo/8.8.8.8', url:'/v1/agent-geo/geo/8.8.8.8' },
+  { label:'Crypto Prices', curl:'curl https://api-catalog-three.vercel.app/v1/defi-trading/prices?symbols=bitcoin,ethereum', url:'/v1/defi-trading/prices?symbols=bitcoin,ethereum' },
+  { label:'DNS Lookup', curl:'curl https://api-catalog-three.vercel.app/v1/agent-dns/api/resolve/google.com', url:'/v1/agent-dns/api/resolve/google.com' }
+];
+let currentDemo = 0;
+
+function selectDemo(i) {
+  currentDemo = i;
+  document.querySelectorAll('.demo-tab').forEach((t,j) => t.classList.toggle('active', i===j));
+  document.getElementById('demo-curl').textContent = demos[i].curl;
+  document.getElementById('demo-output').textContent = 'Click "Run" to see the response...';
+}
+
+async function runDemo() {
+  const out = document.getElementById('demo-output');
+  out.innerHTML = '<span class="demo-loading">Loading...</span>';
+  try {
+    const r = await fetch('https://api-catalog-three.vercel.app' + demos[currentDemo].url);
+    const j = await r.json();
+    out.textContent = JSON.stringify(j, null, 2);
+  } catch(e) {
+    out.textContent = 'Error: ' + e.message;
+  }
+}
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+</script>
+</body>
+</html>
