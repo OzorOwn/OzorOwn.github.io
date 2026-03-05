@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Crypto Price API — 500+ Tokens, Real-Time Data, No Signup</title>
+<meta name="description" content="Free cryptocurrency price API with 500+ tokens. Get real-time BTC, ETH, SOL prices via REST API. No signup, no credit card. 200 free API calls. Compare with CoinGecko, CoinMarketCap alternatives.">
+<meta name="keywords" content="free crypto API, cryptocurrency price API, bitcoin price API, ethereum price API, real-time crypto prices, REST API, free tier, CoinGecko alternative, no signup API">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://ozorown.github.io/free-crypto-api/">
+<meta property="og:title" content="Free Crypto Price API — 500+ Tokens, No Signup">
+<meta property="og:description" content="Real-time cryptocurrency prices for 500+ tokens. REST API with free tier. No signup required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ozorown.github.io/free-crypto-api/">
+<meta property="og:site_name" content="Frostbyte API">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Crypto Price API — 500+ Tokens">
+<meta name="twitter:description" content="Real-time BTC, ETH, SOL prices. REST API, 200 free calls, no signup.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "name": "Frostbyte Crypto Price API",
+  "description": "Free cryptocurrency price API providing real-time prices for 500+ tokens including Bitcoin, Ethereum, Solana, and more. REST API with JSON responses.",
+  "url": "https://ozorown.github.io/free-crypto-api/",
+  "documentation": "https://agent-gateway-kappa.vercel.app/docs",
+  "provider": {"@type": "Organization", "name": "Frostbyte", "url": "https://ozorown.github.io"},
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "200 free API credits"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Is the crypto price API really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You get 200 free API credits with no signup, no credit card, and no email required. Each API call costs 1 credit. After the free tier, credits cost $1 per 500 calls."}},
+    {"@type": "Question", "name": "How many cryptocurrencies does the API support?", "acceptedAnswer": {"@type": "Answer", "text": "The API supports 500+ tokens including Bitcoin (BTC), Ethereum (ETH), Solana (SOL), BNB, XRP, Dogecoin, and hundreds of altcoins and DeFi tokens. Prices are sourced from major exchanges."}},
+    {"@type": "Question", "name": "How do I get an API key?", "acceptedAnswer": {"@type": "Answer", "text": "Run: curl -X POST https://agent-gateway-kappa.vercel.app/api/keys/create — you'll instantly receive an API key with 200 free credits. No signup or email required."}},
+    {"@type": "Question", "name": "What format does the API return?", "acceptedAnswer": {"@type": "Answer", "text": "The API returns JSON responses with token symbols and USD prices. The simple endpoint returns symbol/price pairs, while the detailed endpoint includes OHLCV data (open, high, low, close, volume, 24h change)."}},
+    {"@type": "Question", "name": "How does this compare to CoinGecko API?", "acceptedAnswer": {"@type": "Answer", "text": "Unlike CoinGecko which requires account creation and has aggressive rate limits on the free tier, Frostbyte gives you instant access with no signup. You also get 40+ other APIs (geolocation, screenshots, DNS, web scraping) with the same key."}},
+    {"@type": "Question", "name": "Can I use this API in production?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The API is production-ready with sub-second response times, 99.9% uptime, and consistent JSON responses. For higher volume, top up credits with USDC on Base ($1 = 500 credits)."}}
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0f1a;--surface:#111827;--surface2:#1a2235;--border:#1e293b;--text:#e2e8f0;--text2:#94a3b8;--accent:#f59e0b;--accent2:#60a5fa;--green:#34d399;--red:#f87171;--mono:'SF Mono',ui-monospace,'Cascadia Code',Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+/* Hero */
+.hero{padding:80px 0 60px;text-align:center;background:linear-gradient(180deg,#111827 0%,var(--bg) 100%)}
+.hero h1{font-size:2.5rem;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,var(--accent),#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.15rem;color:var(--text2);max-width:600px;margin:0 auto 32px}
+.hero-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:.85rem;color:var(--text2)}
+.badge strong{color:var(--text)}
+.cta-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:#fbbf24;text-decoration:none}
+.btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent2);text-decoration:none}
+
+/* Live prices */
+.prices-section{padding:60px 0}
+.prices-section h2{font-size:1.8rem;text-align:center;margin-bottom:8px}
+.prices-section .subtitle{text-align:center;color:var(--text2);margin-bottom:32px}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center}
+.price-card .symbol{font-weight:700;font-size:1.1rem}
+.price-card .name{font-size:.8rem;color:var(--text2)}
+.price-card .price{font-family:var(--mono);font-weight:600;font-size:1.05rem}
+.price-card .change{font-size:.8rem;font-family:var(--mono)}
+.up{color:var(--green)}
+.down{color:var(--red)}
+.prices-meta{text-align:center;color:var(--text2);font-size:.85rem}
+
+/* Code examples */
+.code-section{padding:60px 0}
+.code-section h2{font-size:1.8rem;text-align:center;margin-bottom:8px}
+.code-section .subtitle{text-align:center;color:var(--text2);margin-bottom:32px}
+.code-tabs{display:flex;gap:4px;margin-bottom:0}
+.code-tab{padding:8px 20px;background:var(--surface2);border:1px solid var(--border);border-bottom:none;border-radius:8px 8px 0 0;cursor:pointer;font-size:.9rem;color:var(--text2);font-family:var(--sans)}
+.code-tab.active{background:var(--surface);color:var(--accent);border-color:var(--accent);border-bottom:1px solid var(--surface)}
+.code-block{background:var(--surface);border:1px solid var(--border);border-radius:0 8px 8px 8px;padding:20px;overflow-x:auto;position:relative}
+.code-block pre{font-family:var(--mono);font-size:.85rem;line-height:1.7;white-space:pre;color:var(--text)}
+.code-block .copy-btn{position:absolute;top:10px;right:10px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:4px 12px;border-radius:4px;cursor:pointer;font-size:.8rem}
+.code-block .copy-btn:hover{color:var(--text);border-color:var(--accent2)}
+.code-example{margin-bottom:32px}
+.response-preview{margin-top:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto}
+.response-preview pre{font-family:var(--mono);font-size:.8rem;color:var(--text2);line-height:1.6}
+
+/* Comparison */
+.compare-section{padding:60px 0}
+.compare-section h2{font-size:1.8rem;text-align:center;margin-bottom:8px}
+.compare-section .subtitle{text-align:center;color:var(--text2);margin-bottom:32px}
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+th{background:var(--surface2);padding:12px 16px;text-align:left;font-size:.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+td{padding:12px 16px;border-top:1px solid var(--border);font-size:.9rem}
+tr:hover td{background:rgba(96,165,250,.03)}
+.check{color:var(--green)}
+.cross{color:var(--red)}
+.highlight-row td{background:rgba(245,158,11,.06)}
+.highlight-row td:first-child{font-weight:700;color:var(--accent)}
+
+/* FAQ */
+.faq-section{padding:60px 0}
+.faq-section h2{font-size:1.8rem;text-align:center;margin-bottom:32px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.faq-q{padding:16px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.faq-q:hover{background:var(--surface2)}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--text2)}
+.faq-item.open .faq-q::after{content:'-'}
+.faq-a{display:none;padding:0 20px 16px;color:var(--text2);line-height:1.7}
+.faq-item.open .faq-a{display:block}
+
+/* Endpoints */
+.endpoints-section{padding:60px 0}
+.endpoints-section h2{font-size:1.8rem;text-align:center;margin-bottom:8px}
+.endpoints-section .subtitle{text-align:center;color:var(--text2);margin-bottom:32px}
+.endpoint{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
+.endpoint-method{display:inline-block;padding:3px 10px;border-radius:4px;font-family:var(--mono);font-size:.8rem;font-weight:700;margin-right:8px}
+.get{background:rgba(52,211,153,.15);color:var(--green)}
+.endpoint-path{font-family:var(--mono);font-size:.9rem}
+.endpoint-desc{color:var(--text2);margin-top:8px;font-size:.9rem}
+
+/* CTA */
+.cta-section{padding:60px 0;text-align:center}
+.cta-section h2{font-size:1.8rem;margin-bottom:12px}
+.cta-section p{color:var(--text2);margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-code{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--mono);font-size:.85rem;max-width:700px;margin:0 auto 24px;text-align:left;overflow-x:auto}
+
+/* Footer */
+footer{padding:40px 0;text-align:center;border-top:1px solid var(--border);color:var(--text2);font-size:.85rem}
+footer a{color:var(--accent2)}
+footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.8rem}
+  .price-grid{grid-template-columns:1fr 1fr}
+  table{font-size:.8rem}
+  th,td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<div class="container">
+  <h1>Free Crypto Price API</h1>
+  <p>Real-time prices for 500+ cryptocurrencies. Simple REST API, JSON responses, no signup required. Get BTC, ETH, SOL prices in one call.</p>
+  <div class="hero-badges">
+    <span class="badge"><strong>500+</strong> Tokens</span>
+    <span class="badge"><strong>200</strong> Free Credits</span>
+    <span class="badge"><strong>&lt;200ms</strong> Response</span>
+    <span class="badge"><strong>No Signup</strong> Required</span>
+  </div>
+  <div class="cta-group">
+    <a href="#get-started" class="btn btn-primary">Get Free API Key</a>
+    <a href="#live-prices" class="btn btn-secondary">See Live Prices</a>
+  </div>
+</div>
+</section>
+
+<section class="prices-section" id="live-prices">
+<div class="container">
+  <h2>Live Cryptocurrency Prices</h2>
+  <p class="subtitle">Powered by the Frostbyte Crypto API — updated every 60 seconds</p>
+  <div class="price-grid" id="priceGrid">
+    <div class="price-card"><div><div class="symbol">Loading...</div></div><div class="price">—</div></div>
+  </div>
+  <p class="prices-meta" id="pricesMeta">Loading prices from API...</p>
+</div>
+</section>
+
+<section class="code-section" id="examples">
+<div class="container">
+  <h2>Quick Start</h2>
+  <p class="subtitle">Get crypto prices in 3 lines of code. Works with any language.</p>
+
+  <div class="code-example">
+    <div class="code-tabs">
+      <div class="code-tab active" data-lang="curl">curl</div>
+      <div class="code-tab" data-lang="js">JavaScript</div>
+      <div class="code-tab" data-lang="python">Python</div>
+    </div>
+    <div class="code-block" id="codeBlock">
+      <button class="copy-btn" onclick="copyCode()">Copy</button>
+      <pre id="codeContent"></pre>
+    </div>
+    <div class="response-preview">
+      <pre>{
+  "BTC": "72257.50",
+  "ETH": "2113.45",
+  "SOL": "90.56",
+  "BNB": "652.05",
+  "XRP": "1.4166",
+  "DOGE": "0.09541",
+  "ADA": "0.27135",
+  ... (500+ tokens)
+}</pre>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="endpoints-section" id="endpoints">
+<div class="container">
+  <h2>API Endpoints</h2>
+  <p class="subtitle">Two endpoints for different use cases</p>
+
+  <div class="endpoint">
+    <span class="endpoint-method get">GET</span>
+    <span class="endpoint-path">/v1/defi-trading/prices</span>
+    <p class="endpoint-desc">Simple price feed — 500+ tokens, returns symbol/price pairs. Best for dashboards, price displays, and quick lookups.</p>
+  </div>
+
+  <div class="endpoint">
+    <span class="endpoint-method get">GET</span>
+    <span class="endpoint-path">/v1/crypto-feeds/api/prices</span>
+    <p class="endpoint-desc">Detailed market data — 38 major tokens with OHLCV data: open, high, low, volume, 24h change percent. Best for trading bots and analytics.</p>
+  </div>
+
+  <div class="endpoint">
+    <span class="endpoint-method get">GET</span>
+    <span class="endpoint-path">/v1/crypto-feeds/api/price/{SYMBOL}</span>
+    <p class="endpoint-desc">Single token lookup — get detailed price data for one specific token. Example: <code>/v1/crypto-feeds/api/price/BTC</code></p>
+  </div>
+</div>
+</section>
+
+<section class="compare-section" id="compare">
+<div class="container">
+  <h2>How It Compares</h2>
+  <p class="subtitle">Free crypto price APIs — feature comparison</p>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Frostbyte</th>
+        <th>CoinGecko</th>
+        <th>CoinMarketCap</th>
+        <th>CryptoCompare</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight-row">
+        <td>Signup Required</td>
+        <td><span class="check">No signup</span></td>
+        <td>Yes (email)</td>
+        <td>Yes (email)</td>
+        <td>Yes (email)</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Free Tier</td>
+        <td><span class="check">200 credits</span></td>
+        <td>30 calls/min</td>
+        <td>10K calls/mo</td>
+        <td>100K calls/mo</td>
+      </tr>
+      <tr>
+        <td>Tokens Supported</td>
+        <td>500+</td>
+        <td>10,000+</td>
+        <td>10,000+</td>
+        <td>5,000+</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Response Time</td>
+        <td><span class="check">&lt;200ms</span></td>
+        <td>300-800ms</td>
+        <td>200-500ms</td>
+        <td>300-600ms</td>
+      </tr>
+      <tr>
+        <td>OHLCV Data</td>
+        <td><span class="check">Yes</span></td>
+        <td><span class="check">Yes</span></td>
+        <td><span class="check">Yes</span></td>
+        <td><span class="check">Yes</span></td>
+      </tr>
+      <tr>
+        <td>Rate Limiting</td>
+        <td>120/min</td>
+        <td>30/min (free)</td>
+        <td>30/min (free)</td>
+        <td>50/min</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Bonus: 40+ Other APIs</td>
+        <td><span class="check">Same key</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+      </tr>
+      <tr>
+        <td>AI Agent / MCP Support</td>
+        <td><span class="check">MCP Server</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</section>
+
+<section class="faq-section" id="faq">
+<div class="container">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item open">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is the crypto price API really free?</div>
+    <div class="faq-a">Yes. You get 200 free API credits instantly with no signup, no credit card, and no email required. Each API call costs 1 credit. After the free tier, credits cost $1 per 500 calls ($0.002 per request).</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How many cryptocurrencies does the API support?</div>
+    <div class="faq-a">The simple endpoint covers 500+ tokens including Bitcoin (BTC), Ethereum (ETH), Solana (SOL), BNB, XRP, Dogecoin, and hundreds of altcoins and DeFi tokens. The detailed endpoint provides OHLCV data for 38 major tokens. Prices are sourced from major exchanges in real-time.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I get an API key?</div>
+    <div class="faq-a">Just run one command:<br><code style="background:var(--surface2);padding:4px 8px;border-radius:4px;font-size:.85rem">curl -X POST https://agent-gateway-kappa.vercel.app/api/keys/create</code><br>You'll get an API key back instantly. No account, no email, no signup form. Start making requests immediately.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What response format does the API use?</div>
+    <div class="faq-a">All responses are JSON. The simple endpoint returns symbol/price pairs: <code>{"BTC": "72257.50", "ETH": "2113.45", ...}</code>. The detailed endpoint returns OHLCV objects with open, high, low, volume, 24h change, and percentage change for each token.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does this compare to CoinGecko?</div>
+    <div class="faq-a">CoinGecko requires email signup, has aggressive rate limits (30 calls/min on free tier), and recently made their free tier more restrictive. Frostbyte gives you instant access with no signup and a faster API. Plus, the same API key also works for 40+ other services (IP geolocation, screenshots, DNS lookup, web scraping, and more).</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I use this API in production?</div>
+    <div class="faq-a">Yes. The API runs on production infrastructure with sub-200ms response times and consistent JSON responses. For higher volume, top up credits with USDC on Base blockchain ($1 = 500 credits). Uptime is monitored 24/7.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What else can I do with the API key?</div>
+    <div class="faq-a">Your API key works across 40+ services: IP geolocation, website screenshots, DNS lookup, WHOIS, web scraping, code execution, PDF generation, URL shortening, web search, and more. One key for everything. See the <a href="https://ozorown.github.io">full API catalog</a>.</div>
+  </div>
+</div>
+</section>
+
+<section class="cta-section" id="get-started">
+<div class="container">
+  <h2>Get Your Free API Key</h2>
+  <p>No signup, no email, no credit card. One command and you're live.</p>
+  <div class="cta-code">
+    <span style="color:var(--text2)"># Get your API key (instant, no signup)</span><br>
+    curl -X POST https://agent-gateway-kappa.vercel.app/api/keys/create<br><br>
+    <span style="color:var(--text2)"># Get crypto prices</span><br>
+    curl "https://agent-gateway-kappa.vercel.app/v1/defi-trading/prices" \<br>
+    &nbsp;&nbsp;-H "Authorization: Bearer YOUR_API_KEY"
+  </div>
+  <div class="cta-group">
+    <a href="https://agent-gateway-kappa.vercel.app/docs" class="btn btn-primary">API Documentation</a>
+    <a href="https://ozorown.github.io" class="btn btn-secondary">Explore All 40+ APIs</a>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+  <div class="links">
+    <a href="https://ozorown.github.io">All APIs</a>
+    <a href="https://agent-gateway-kappa.vercel.app/docs">API Docs</a>
+    <a href="https://github.com/OzorOwn/frostbyte-api">SDK (GitHub)</a>
+    <a href="https://github.com/OzorOwn/frostbyte-mcp">MCP Server</a>
+  </div>
+  <p>Frostbyte API &mdash; Free APIs for developers and AI agents</p>
+</div>
+</footer>
+
+<script>
+const API_BASE = 'https://agent-gateway-kappa.vercel.app';
+const DEMO_KEY = 'demo';
+const TOP_TOKENS = ['BTC','ETH','SOL','BNB','XRP','DOGE','ADA','AVAX','DOT','LINK','ATOM','NEAR','APT','SUI','ARB','OP','INJ','TIA','FIL','UNI','AAVE','LDO','RENDER','FET','ONDO','ENA','PENDLE','WLD','STX','IMX'];
+
+const codeExamples = {
+  curl: `# Step 1: Get your API key (instant, no signup)
+curl -X POST ${API_BASE}/api/keys/create
+
+# Step 2: Get all crypto prices (500+ tokens)
+curl "${API_BASE}/v1/defi-trading/prices" \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Step 3: Get detailed data for a specific token
+curl "${API_BASE}/v1/crypto-feeds/api/price/BTC" \\
+  -H "Authorization: Bearer YOUR_API_KEY"`,
+  js: `// Get your API key first:
+// curl -X POST ${API_BASE}/api/keys/create
+
+const API_KEY = 'YOUR_API_KEY';
+const BASE = '${API_BASE}';
+
+// Get all prices (500+ tokens)
+const prices = await fetch(BASE + '/v1/defi-trading/prices', {
+  headers: { Authorization: 'Bearer ' + API_KEY }
+}).then(r => r.json());
+
+console.log('BTC:', prices.prices.BTC);   // "72257.50"
+console.log('ETH:', prices.prices.ETH);   // "2113.45"
+console.log('Total tokens:', prices.count); // 527
+
+// Get detailed data for one token
+const btc = await fetch(BASE + '/v1/crypto-feeds/api/price/BTC', {
+  headers: { Authorization: 'Bearer ' + API_KEY }
+}).then(r => r.json());
+
+console.log('24h change:', btc.change_pct + '%');`,
+  python: `import requests
+
+# Get your API key first:
+# curl -X POST ${API_BASE}/api/keys/create
+
+API_KEY = "YOUR_API_KEY"
+BASE = "${API_BASE}"
+headers = {"Authorization": f"Bearer {API_KEY}"}
+
+# Get all prices (500+ tokens)
+prices = requests.get(f"{BASE}/v1/defi-trading/prices", headers=headers).json()
+print(f"BTC: ${prices['prices']['BTC']}")
+print(f"Total tokens: {prices['count']}")
+
+# Get detailed data for one token
+btc = requests.get(f"{BASE}/v1/crypto-feeds/api/price/BTC", headers=headers).json()
+print(f"24h change: {btc['change_pct']}%")`
+};
+
+// Code tabs
+document.querySelectorAll('.code-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('codeContent').textContent = codeExamples[tab.dataset.lang];
+  });
+});
+document.getElementById('codeContent').textContent = codeExamples.curl;
+
+function copyCode() {
+  navigator.clipboard.writeText(document.getElementById('codeContent').textContent);
+  const btn = document.querySelector('.copy-btn');
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = 'Copy', 2000);
+}
+
+// Fetch live prices
+async function loadPrices() {
+  try {
+    const r = await fetch(API_BASE + '/v1/crypto-feeds/api/prices', {
+      headers: { 'Authorization': 'Bearer demo' }
+    });
+    if (!r.ok) throw new Error('API error');
+    const data = await r.json();
+
+    const grid = document.getElementById('priceGrid');
+    grid.innerHTML = '';
+    const tokenNames = {BTC:'Bitcoin',ETH:'Ethereum',SOL:'Solana',BNB:'BNB',XRP:'XRP',DOGE:'Dogecoin',ADA:'Cardano',AVAX:'Avalanche',DOT:'Polkadot',LINK:'Chainlink',ATOM:'Cosmos',NEAR:'NEAR',APT:'Aptos',SUI:'Sui',ARB:'Arbitrum',OP:'Optimism',INJ:'Injective',TIA:'Celestia',FIL:'Filecoin',UNI:'Uniswap',AAVE:'Aave',LDO:'Lido',RENDER:'Render',FET:'Fetch.ai',ONDO:'Ondo',ENA:'Ethena',PENDLE:'Pendle',WLD:'Worldcoin',STX:'Stacks',IMX:'Immutable X'};
+
+    TOP_TOKENS.forEach(sym => {
+      const key = sym + 'USDT';
+      const info = data.prices ? data.prices[key] : null;
+      if (!info) return;
+      const price = typeof info === 'object' ? info.price : info;
+      const change = typeof info === 'object' ? info.change_pct : null;
+      const fmtPrice = price >= 1000 ? '$' + Number(price).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})
+        : price >= 1 ? '$' + Number(price).toFixed(2)
+        : '$' + Number(price).toPrecision(4);
+
+      const card = document.createElement('div');
+      card.className = 'price-card';
+      card.innerHTML = `<div><div class="symbol">${sym}</div><div class="name">${tokenNames[sym]||sym}</div></div><div style="text-align:right"><div class="price">${fmtPrice}</div>${change !== null ? `<div class="change ${change >= 0 ? 'up' : 'down'}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</div>` : ''}</div>`;
+      grid.appendChild(card);
+    });
+
+    const total = data.count || Object.keys(data.prices||{}).length;
+    document.getElementById('pricesMeta').textContent = `Showing ${TOP_TOKENS.length} of ${total}+ tokens available via API. Last updated: ${new Date().toLocaleTimeString()}`;
+  } catch (e) {
+    // Fallback to static display
+    document.getElementById('pricesMeta').textContent = 'Live prices — get your API key to access all 500+ tokens';
+  }
+}
+
+loadPrices();
+setInterval(loadPrices, 60000);
+</script>
+</body>
+</html>

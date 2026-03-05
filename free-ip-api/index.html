@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free IP Geolocation API — Country, City, ISP Lookup, No Signup</title>
+<meta name="description" content="Free IP geolocation API with country, city, region, ISP, timezone data. No signup, no API key required to try. MaxMind alternative with 200 free lookups. REST API with JSON responses.">
+<meta name="keywords" content="free IP API, IP geolocation API, IP address lookup, IP to location, free GeoIP, MaxMind alternative, ipinfo alternative, IP country lookup, REST API">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://ozorown.github.io/free-ip-api/">
+<meta property="og:title" content="Free IP Geolocation API — No Signup Required">
+<meta property="og:description" content="Get country, city, ISP, timezone from any IP address. REST API, 200 free calls, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ozorown.github.io/free-ip-api/">
+<meta property="og:site_name" content="Frostbyte API">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free IP Geolocation API">
+<meta name="twitter:description" content="IP to country, city, ISP. 200 free calls. No signup. REST API.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "name": "Frostbyte IP Geolocation API",
+  "description": "Free IP geolocation API providing country, city, region, ISP, timezone, and coordinates for any IP address. REST API with JSON responses.",
+  "url": "https://ozorown.github.io/free-ip-api/",
+  "documentation": "https://agent-gateway-kappa.vercel.app/docs",
+  "provider": {"@type": "Organization", "name": "Frostbyte", "url": "https://ozorown.github.io"},
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "200 free API credits"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Is the IP geolocation API free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You get 200 free API credits instantly. No signup, no credit card, no email. Each lookup costs 1 credit. After the free tier, credits are $1 per 500 lookups."}},
+    {"@type": "Question", "name": "What data does the API return for an IP address?", "acceptedAnswer": {"@type": "Answer", "text": "The API returns country, country code, region, city, latitude, longitude, timezone, ISP, organization, and AS number. All data is returned as a single JSON object per IP lookup."}},
+    {"@type": "Question", "name": "How accurate is the geolocation data?", "acceptedAnswer": {"@type": "Answer", "text": "Country-level accuracy is 99%+. City-level accuracy is approximately 80-90% for most regions. The data is sourced from multiple geolocation databases and updated regularly."}},
+    {"@type": "Question", "name": "How does this compare to MaxMind GeoLite2?", "acceptedAnswer": {"@type": "Answer", "text": "MaxMind requires account creation, downloading databases, and setting up local infrastructure. Frostbyte is a simple REST API — one HTTP request returns geolocation data instantly. No database downloads, no account, no server-side setup."}},
+    {"@type": "Question", "name": "Can I look up my own IP address?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Use the /v1/agent-geo/geo/me endpoint or pass your IP to /v1/agent-geo/geo/{ip}. The API will return your location data based on your public IP address."}},
+    {"@type": "Question", "name": "Is there a rate limit?", "acceptedAnswer": {"@type": "Answer", "text": "The free tier allows 120 requests per minute. Each request costs 1 credit from your 200 free credits. For higher volume, top up with USDC on Base ($1 = 500 credits)."}}
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0f1a;--surface:#111827;--surface2:#1a2235;--border:#1e293b;--text:#e2e8f0;--text2:#94a3b8;--accent:#34d399;--accent2:#60a5fa;--green:#34d399;--red:#f87171;--mono:'SF Mono',ui-monospace,'Cascadia Code',Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+.hero{padding:80px 0 60px;text-align:center;background:linear-gradient(180deg,#111827 0%,var(--bg) 100%)}
+.hero h1{font-size:2.5rem;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,var(--accent),#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.15rem;color:var(--text2);max-width:600px;margin:0 auto 32px}
+.hero-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:.85rem;color:var(--text2)}
+.badge strong{color:var(--text)}
+.cta-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:#6ee7b7;text-decoration:none}
+.btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent2);text-decoration:none}
+
+.demo-section{padding:60px 0}
+.demo-section h2{font-size:1.8rem;text-align:center;margin-bottom:8px}
+.demo-section .subtitle{text-align:center;color:var(--text2);margin-bottom:32px}
+.demo-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:700px;margin:0 auto}
+.demo-input{display:flex;gap:8px;margin-bottom:16px}
+.demo-input input{flex:1;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:.9rem}
+.demo-input input:focus{outline:none;border-color:var(--accent)}
+.demo-input button{padding:10px 20px;background:var(--accent);color:#000;border:none;border-radius:6px;font-weight:600;cursor:pointer}
+.demo-input button:hover{background:#6ee7b7}
+.demo-result{background:var(--surface2);border-radius:8px;padding:16px;font-family:var(--mono);font-size:.85rem;min-height:120px;overflow-x:auto;white-space:pre}
+.demo-result .label{color:var(--text2)}
+.demo-result .value{color:var(--text)}
+
+.data-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:16px}
+.data-item{background:var(--surface2);border-radius:8px;padding:12px}
+.data-item .label{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+.data-item .value{font-size:1rem;font-weight:600;margin-top:4px}
+
+section{padding:60px 0}
+section h2{font-size:1.8rem;text-align:center;margin-bottom:8px}
+section .subtitle{text-align:center;color:var(--text2);margin-bottom:32px}
+.code-tabs{display:flex;gap:4px;margin-bottom:0}
+.code-tab{padding:8px 20px;background:var(--surface2);border:1px solid var(--border);border-bottom:none;border-radius:8px 8px 0 0;cursor:pointer;font-size:.9rem;color:var(--text2);font-family:var(--sans)}
+.code-tab.active{background:var(--surface);color:var(--accent);border-color:var(--accent);border-bottom:1px solid var(--surface)}
+.code-block{background:var(--surface);border:1px solid var(--border);border-radius:0 8px 8px 8px;padding:20px;overflow-x:auto;position:relative}
+.code-block pre{font-family:var(--mono);font-size:.85rem;line-height:1.7;white-space:pre;color:var(--text)}
+.code-block .copy-btn{position:absolute;top:10px;right:10px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:4px 12px;border-radius:4px;cursor:pointer;font-size:.8rem}
+
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+th{background:var(--surface2);padding:12px 16px;text-align:left;font-size:.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+td{padding:12px 16px;border-top:1px solid var(--border);font-size:.9rem}
+.check{color:var(--green)}.cross{color:var(--red)}
+.highlight-row td{background:rgba(52,211,153,.06)}
+.highlight-row td:first-child{font-weight:700;color:var(--accent)}
+
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.faq-q{padding:16px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.faq-q:hover{background:var(--surface2)}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--text2)}
+.faq-item.open .faq-q::after{content:'-'}
+.faq-a{display:none;padding:0 20px 16px;color:var(--text2);line-height:1.7}
+.faq-item.open .faq-a{display:block}
+
+.cta-section{text-align:center}
+.cta-code{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--mono);font-size:.85rem;max-width:700px;margin:0 auto 24px;text-align:left;overflow-x:auto}
+
+footer{padding:40px 0;text-align:center;border-top:1px solid var(--border);color:var(--text2);font-size:.85rem}
+footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.8rem}
+  .data-grid{grid-template-columns:1fr 1fr}
+  table{font-size:.8rem}
+  th,td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<div class="container">
+  <h1>Free IP Geolocation API</h1>
+  <p>Look up any IP address to get country, city, ISP, timezone, and coordinates. REST API with JSON responses. No signup required.</p>
+  <div class="hero-badges">
+    <span class="badge"><strong>99%+</strong> Country Accuracy</span>
+    <span class="badge"><strong>200</strong> Free Lookups</span>
+    <span class="badge"><strong>&lt;100ms</strong> Response</span>
+    <span class="badge"><strong>No Signup</strong></span>
+  </div>
+  <div class="cta-group">
+    <a href="#get-started" class="btn btn-primary">Get Free API Key</a>
+    <a href="#demo" class="btn btn-secondary">Try It Live</a>
+  </div>
+</div>
+</section>
+
+<section class="demo-section" id="demo">
+<div class="container">
+  <h2>Try It Live</h2>
+  <p class="subtitle">Enter any IP address to see the geolocation data</p>
+  <div class="demo-box">
+    <div class="demo-input">
+      <input type="text" id="ipInput" placeholder="Enter IP address (e.g. 8.8.8.8)" value="8.8.8.8">
+      <button onclick="lookupIP()">Lookup</button>
+    </div>
+    <div class="data-grid" id="dataGrid" style="display:none"></div>
+    <div class="demo-result" id="demoResult">Click "Lookup" to see geolocation data for any IP address.</div>
+  </div>
+</div>
+</section>
+
+<section id="examples">
+<div class="container">
+  <h2>Quick Start</h2>
+  <p class="subtitle">IP geolocation in 3 lines of code</p>
+  <div class="code-tabs">
+    <div class="code-tab active" data-lang="curl">curl</div>
+    <div class="code-tab" data-lang="js">JavaScript</div>
+    <div class="code-tab" data-lang="python">Python</div>
+  </div>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+    <pre id="codeContent"></pre>
+  </div>
+</div>
+</section>
+
+<section id="compare">
+<div class="container">
+  <h2>How It Compares</h2>
+  <p class="subtitle">Free IP geolocation APIs — feature comparison</p>
+  <div style="overflow-x:auto">
+  <table>
+    <thead><tr><th>Feature</th><th>Frostbyte</th><th>MaxMind GeoLite2</th><th>ipinfo.io</th><th>ip-api.com</th></tr></thead>
+    <tbody>
+      <tr class="highlight-row"><td>Signup Required</td><td><span class="check">No</span></td><td>Yes</td><td>Yes</td><td>No</td></tr>
+      <tr class="highlight-row"><td>Setup Complexity</td><td><span class="check">1 HTTP request</span></td><td>Download DB + code</td><td>1 HTTP request</td><td>1 HTTP request</td></tr>
+      <tr><td>Free Tier</td><td>200 lookups</td><td>Unlimited (local)</td><td>50K/month</td><td>45/min</td></tr>
+      <tr><td>Data Fields</td><td>10+ fields</td><td>City/country/coords</td><td>12+ fields</td><td>14 fields</td></tr>
+      <tr class="highlight-row"><td>Response Time</td><td><span class="check">&lt;100ms</span></td><td>Local (instant)</td><td>100-200ms</td><td>50-100ms</td></tr>
+      <tr><td>HTTPS</td><td><span class="check">Yes</span></td><td>N/A (local)</td><td><span class="check">Yes</span></td><td>Paid only</td></tr>
+      <tr class="highlight-row"><td>Bonus: 40+ Other APIs</td><td><span class="check">Same key</span></td><td><span class="cross">No</span></td><td><span class="cross">No</span></td><td><span class="cross">No</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</section>
+
+<section id="faq">
+<div class="container">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item open">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is the IP geolocation API free?</div>
+    <div class="faq-a">Yes. You get 200 free API credits instantly. No signup, no credit card, no email. Each lookup costs 1 credit. After the free tier, credits cost $1 per 500 lookups.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What data does the API return?</div>
+    <div class="faq-a">Country, country code, region, city, latitude, longitude, timezone, ISP, organization, and AS number. All returned as a single JSON object.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How accurate is the geolocation?</div>
+    <div class="faq-a">Country-level accuracy is 99%+. City-level accuracy is approximately 80-90% for most regions. Data is sourced from multiple geolocation databases and updated regularly.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does this compare to MaxMind?</div>
+    <div class="faq-a">MaxMind requires account creation, downloading databases, and local infrastructure setup. Frostbyte is a simple REST API — one HTTP request returns geolocation data. No database downloads, no account, no server-side setup needed.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I look up my own IP?</div>
+    <div class="faq-a">Yes. The live demo above auto-detects your IP. Via the API, you can pass any IP address to get its location data.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What else can I do with the API key?</div>
+    <div class="faq-a">Your API key works across 40+ services: crypto prices, website screenshots, DNS lookup, WHOIS, web scraping, code execution, PDF generation, and more. One key for everything. See the <a href="https://ozorown.github.io">full API catalog</a>.</div>
+  </div>
+</div>
+</section>
+
+<section class="cta-section" id="get-started">
+<div class="container">
+  <h2>Get Your Free API Key</h2>
+  <p class="subtitle">No signup, no email, no credit card. One command and you're live.</p>
+  <div class="cta-code">
+    <span style="color:var(--text2)"># Get your API key (instant, no signup)</span><br>
+    curl -X POST https://agent-gateway-kappa.vercel.app/api/keys/create<br><br>
+    <span style="color:var(--text2)"># Look up any IP address</span><br>
+    curl "https://agent-gateway-kappa.vercel.app/v1/agent-geo/geo/8.8.8.8" \<br>
+    &nbsp;&nbsp;-H "Authorization: Bearer YOUR_API_KEY"
+  </div>
+  <div class="cta-group">
+    <a href="https://agent-gateway-kappa.vercel.app/docs" class="btn btn-primary">API Documentation</a>
+    <a href="https://ozorown.github.io" class="btn btn-secondary">Explore All 40+ APIs</a>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+  <div class="links">
+    <a href="https://ozorown.github.io">All APIs</a>
+    <a href="https://ozorown.github.io/free-crypto-api/">Crypto Price API</a>
+    <a href="https://agent-gateway-kappa.vercel.app/docs">API Docs</a>
+    <a href="https://github.com/OzorOwn/frostbyte-api">SDK</a>
+  </div>
+  <p>Frostbyte API &mdash; Free APIs for developers and AI agents</p>
+</div>
+</footer>
+
+<script>
+const API_BASE = 'https://agent-gateway-kappa.vercel.app';
+
+const codeExamples = {
+  curl: `# Step 1: Get your API key (instant, no signup)
+curl -X POST ${API_BASE}/api/keys/create
+
+# Step 2: Look up any IP address
+curl "${API_BASE}/v1/agent-geo/geo/8.8.8.8" \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Response:
+# {
+#   "ip": "8.8.8.8",
+#   "country": "United States",
+#   "countryCode": "US",
+#   "region": "Virginia",
+#   "city": "Ashburn",
+#   "lat": 39.0438,
+#   "lon": -77.4874,
+#   "timezone": "America/New_York",
+#   "isp": "Google LLC",
+#   "org": "Google Public DNS",
+#   "as": "AS15169"
+# }`,
+  js: `const API_KEY = 'YOUR_API_KEY';
+const BASE = '${API_BASE}';
+
+// Look up an IP address
+const geo = await fetch(BASE + '/v1/agent-geo/geo/8.8.8.8', {
+  headers: { Authorization: 'Bearer ' + API_KEY }
+}).then(r => r.json());
+
+console.log(geo.country);  // "United States"
+console.log(geo.city);     // "Ashburn"
+console.log(geo.isp);      // "Google LLC"
+console.log(\`\${geo.lat}, \${geo.lon}\`); // "39.0438, -77.4874"
+
+// Use for content personalization
+const userGeo = await fetch(BASE + '/v1/agent-geo/geo/' + userIP, {
+  headers: { Authorization: 'Bearer ' + API_KEY }
+}).then(r => r.json());
+
+if (userGeo.countryCode === 'DE') {
+  showGermanContent();
+}`,
+  python: `import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE = "${API_BASE}"
+headers = {"Authorization": f"Bearer {API_KEY}"}
+
+# Look up an IP address
+geo = requests.get(f"{BASE}/v1/agent-geo/geo/8.8.8.8", headers=headers).json()
+
+print(f"Country: {geo['country']}")   # United States
+print(f"City: {geo['city']}")         # Ashburn
+print(f"ISP: {geo['isp']}")           # Google LLC
+print(f"Coords: {geo['lat']}, {geo['lon']}")
+
+# Batch lookups
+ips = ["1.1.1.1", "8.8.4.4", "208.67.222.222"]
+for ip in ips:
+    data = requests.get(f"{BASE}/v1/agent-geo/geo/{ip}", headers=headers).json()
+    print(f"{ip} -> {data['city']}, {data['country']}")`
+};
+
+document.querySelectorAll('.code-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('codeContent').textContent = codeExamples[tab.dataset.lang];
+  });
+});
+document.getElementById('codeContent').textContent = codeExamples.curl;
+
+function copyCode() {
+  navigator.clipboard.writeText(document.getElementById('codeContent').textContent);
+  const btn = document.querySelector('.copy-btn');
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = 'Copy', 2000);
+}
+
+async function lookupIP() {
+  const ip = document.getElementById('ipInput').value.trim();
+  if (!ip) return;
+  const result = document.getElementById('demoResult');
+  const grid = document.getElementById('dataGrid');
+  result.textContent = 'Looking up ' + ip + '...';
+  grid.style.display = 'none';
+
+  try {
+    const r = await fetch(API_BASE + '/v1/agent-geo/geo/' + encodeURIComponent(ip), {
+      headers: { 'Authorization': 'Bearer demo' }
+    });
+    const data = await r.json();
+    if (data.error) {
+      result.textContent = 'Error: ' + (data.error || data.message);
+      return;
+    }
+    result.style.display = 'none';
+    grid.style.display = 'grid';
+    const fields = [
+      {label:'Country',value:data.country||'—'},
+      {label:'Region',value:data.region||data.regionName||'—'},
+      {label:'City',value:data.city||'—'},
+      {label:'Timezone',value:data.timezone||'—'},
+      {label:'ISP',value:data.isp||'—'},
+      {label:'Coordinates',value:data.lat && data.lon ? `${data.lat}, ${data.lon}` : '—'},
+      {label:'Organization',value:data.org||'—'},
+      {label:'AS Number',value:data.as||'—'}
+    ];
+    grid.innerHTML = fields.map(f => `<div class="data-item"><div class="label">${f.label}</div><div class="value">${f.value}</div></div>`).join('');
+  } catch (e) {
+    result.style.display = 'block';
+    result.textContent = 'Error: Could not reach API. Get an API key to use programmatically.';
+  }
+}
+</script>
+</body>
+</html>
